@@ -3,6 +3,8 @@
 
 ### Construisez une API sécurisée pour une application d'avis gastronomiques
 
+![screenshot](piquante.jpg)
+
 run `npm install` in back folder then run `nodemon server`to launch the server
 
 run `npm install`in front folder then run `ng serve`
