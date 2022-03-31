@@ -1,5 +1,9 @@
 # Back #
-## Install ##
+## Install depdencies ##
+
+run `npm install` in back folder with terminal
 
 
-run `npm install` in back folder then run `nodemon server`to launch the server
+## Set server with nodemon ##
+
+run `nodemon server`  in back folder with terminal
