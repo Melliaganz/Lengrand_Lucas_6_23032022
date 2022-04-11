@@ -1,6 +1,7 @@
 const Sauce = require('../models/sauce');
 const fs = require('fs');
-
+const jwt = require('jsonwebtoken');
+const dotenv= require('dotenv')
 //creation d'une sauce par un utilisateur
 exports.createSauce = (req, res) => {
     const sauceObject = JSON.parse(req.body.sauce);
@@ -60,10 +61,14 @@ exports.updateSauce = (req, res, next) => {
 
 
 //suppression d'une sauce
-exports.deleteSauce = (req, res) => {
+exports.deleteSauce = (req, res, next) => {
+    dotenv.config();
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWTPRIVATEKEY);
+    const userId = decodedToken.userId;
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
-
+            if (sauce.userId === userId ){
             const fileName = sauce.imageUrl.split('/images/')[1];
             fs.unlink(`images/${fileName}`, () => {
                 Sauce.deleteOne({ _id: req.params.id })
@@ -71,8 +76,8 @@ exports.deleteSauce = (req, res) => {
                     .catch((error) => res.status(400).json({ error }));
             });
 
-        })
-        .catch((error) => res.status(400).json({ error }))
+        }else { throw 'invalid user ID'}})
+        .catch((error) => res.status(401).json({ error }))
 };
 
 //gestion des likes

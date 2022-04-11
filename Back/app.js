@@ -1,8 +1,14 @@
+//Framework express pour Node
 const express = require('express');
+//Appel de la base de donnée de mongoose
 const mongoose = require('mongoose');
+//Module path de Node
 const path = require('path');
+//Middleware Express pour sécuriser les headers HTTP
 const helmet = require('helmet');
+//Mise en place du .env
 const dotenv = require('dotenv');
+//Node.js et express Middleware pour requêtes HTTP et erreurs.
 const morgan = require('morgan');
 
 dotenv.config();
@@ -12,7 +18,7 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
-//connexion à la base de données
+//connexion à la base de données en utilisant les logins du fichier .env
 mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cluster0.rwp9v.mongodb.net/' + process.env.DB_NAME +'?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
