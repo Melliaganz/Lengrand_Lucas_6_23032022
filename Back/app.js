@@ -19,7 +19,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 //connexion à la base de données en utilisant les logins du fichier .env
-mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@cluster0.rwp9v.mongodb.net/' + process.env.DB_NAME +'?retryWrites=true&w=majority', {
+mongoose.connect(`${process.env.DB_LIEN}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
