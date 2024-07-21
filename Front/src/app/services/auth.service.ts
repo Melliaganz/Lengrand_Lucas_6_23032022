@@ -16,7 +16,7 @@ export class AuthService {
               private router: Router) {}
 
   createUser(email: string, password: string) {
-    return this.http.post<{ message: string }>('https://piquante-92332b6b8389.herokuapp.com/api/auth/signup', {email: email, password: password});
+    return this.http.post<{ message: string }>('https://piquante-3ifd.onrender.com/api/auth/signup', {email: email, password: password});
   }
 
   getToken() {
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   loginUser(email: string, password: string) {
-    return this.http.post<{ userId: string, token: string }>('https://piquante-92332b6b8389.herokuapp.com/api/auth/login', {email: email, password: password}).pipe(
+    return this.http.post<{ userId: string, token: string }>('https://piquante-3ifd.onrender.com/api/auth/login', {email: email, password: password}).pipe(
       tap(({ userId, token }) => {
         this.userId = userId;
         this.authToken = token;
